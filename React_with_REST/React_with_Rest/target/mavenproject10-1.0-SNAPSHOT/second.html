@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" /> <title>Hello World</title>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script async src="https://ga.jspm.io/npm:es-module-shims@1.7.0/dist/es-module-
+shims.js"></script>
+<script type="importmap">
+{
+"imports": {
+"react": "https://esm.sh/react?dev",
+"react-dom/client": "https://esm.sh/react-dom/client?dev"
+}
+}
+</script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-type="module" >
+import React, { useEffect, useState, StrictMode, useRef } from 'react';
+import { createRoot } from 'react-dom/client';
+
+
+const helloW = "hello to allall";
+
+
+
+
+
+
+const MyApp = () => {
+    
+    
+    const [contacts,setContacts] = useState(
+            [{"firstname":"Todd","homephone":"123"},
+           {"firstname":"Ben","homephone":"456"}]
+   );
+    
+    const [selected, setSelected] = useState({});
+    
+    useEffect(
+        () => {
+            async function getContacts() {
+            let result = await fetch(
+            "http://localhost:8080/mavenproject10/resources/showcontact",
+            {
+            method: 'GET',
+            headers: {'Accept': 'application/json'}
+            });
+            const json = await result.json();
+            setContacts(json);
+        };
+       
+        const timeInterval = setInterval(getContacts,300);
+
+         return () => clearInterval(timeInterval);
+    },[]);
+    
+    
+    const handleClick = (event, field, index)=> {
+        setSelected({"index":index, "field":field, "value":event.target.value});
+    };
+    
+    
+    function handleChange(event,field,index) {
+       setSelected({"index":index, "field":selected.field, "value":event.target.value});
+    }
+    
+    
+    
+    function handleSubmit(event){
+        var newItem;
+        contacts.map((item, key) => {
+        if (key === selected.index) { //this is the one the user is changing
+            newItem = Object.assign({}, item, {[selected.field]: selected.value}); 
+
+            setSelected({});
+            fetch("http://localhost:8080/mavenproject10/resources/showcontact/"+item.id, {
+            method: 'PUT',
+            body: JSON.stringify(newItem),
+            headers: {'Content-type': 'application/json'}})
+            .then(res => res.text());
+        }
+        });
+        event.preventDefault();
+        
+        
+        
+    }
+    
+    
+   return <form onSubmit={handleSubmit}>
+      <table>
+        <tr><th>firstname</th><th>homephone</th>{selected.field != null ? <th>new {selected.field}</th>:""}</tr>
+        {contacts.map((item,key)=>{
+        return (
+        <tr>
+            <td> <input type="text" name={item.id} value={item.firstname} onClick={(e) => handleClick(e,"firstname",key)}
+            onChange={(e)=>handleChange(e,"firstname",key)} /> </td>
+            <td> <input type="text" name={item.id} value={item.homephone} onClick={(e) => handleClick(e,"homephone",key)}
+            onChange={(e)=>handleChange(e,"homephone",key)} /> </td>
+            
+            {selected.index === key ? (<td><input id="selected" type="text" size="7" name="selected" autoFocus value={selected.value} onChange={(e) =>handleChange(e, "selected", key)}/></td>) : ""}
+                 
+        </tr>
+            )
+        })}
+        
+        {selected.index != null ? (<tr><td></td><td></td><td><input type="submit" value="Submit" /></td></tr>) :(<tr><td></td></tr>)}
+       </table>
+     
+    </form>;
+};
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<MyApp />);
+</script>
+</body>
+</html>
+
+
+

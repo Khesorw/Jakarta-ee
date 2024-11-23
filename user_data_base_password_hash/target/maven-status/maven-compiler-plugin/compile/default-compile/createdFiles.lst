@@ -1,0 +1,10 @@
+com\mycompany\appuser2\AbstractFacade.class
+com\mycompany\appuser2\AppUserController$1.class
+com\mycompany\appuser2\AppUserFacade.class
+com\mycompany\appuser2\AppUserController$AppUserControllerConverter.class
+com\mycompany\appuser2\AppUserController.class
+com\mycompany\appuser2\resources\JavaEE8Resource.class
+com\mycompany\appuser2\util\PaginationHelper.class
+entity\AppUser.class
+com\mycompany\appuser2\util\JsfUtil.class
+com\mycompany\appuser2\JAXRSConfiguration.class

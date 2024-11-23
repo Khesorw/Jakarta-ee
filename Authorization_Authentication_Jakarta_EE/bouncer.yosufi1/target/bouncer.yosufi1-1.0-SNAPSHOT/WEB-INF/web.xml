@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>faces/index.xhtml</welcome-file>
+    </welcome-file-list>
+    <security-constraint>
+        <display-name>AdminConstraint</display-name>
+        <web-resource-collection>
+        <web-resource-name>admin</web-resource-name>
+        <description>Administration area</description>
+        <url-pattern>/faces/bouncer/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+        <description>Basic Constraint</description>
+        <role-name>Administrator</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    <security-constraint>
+        <display-name>AdminConstraint2</display-name>
+        <web-resource-collection>
+        <web-resource-name>adminrest</web-resource-name>
+        <description>Administration arearest</description>
+        <url-pattern>/api/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+        <description>Basic Constraint</description>
+        <role-name>Administrator</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    
+    
+       <security-constraint>
+        <display-name>RestConstraint</display-name>
+        <web-resource-collection>
+        <web-resource-name>Restful Resource</web-resource-name>
+        <description>Rest area</description>
+        <url-pattern>/api/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+        <description>Rest Constraint</description>
+        <role-name>RestGroup</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    
+      <security-constraint>
+        <display-name>JSF Pagest</display-name>
+        <web-resource-collection>
+        <web-resource-name>JSF Resource</web-resource-name>
+        <description>JSF area</description>
+         <url-pattern>/faces/bouncer/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+        <description>JSF Constraint</description>
+        <role-name>JsfGroup</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    
+</web-app>

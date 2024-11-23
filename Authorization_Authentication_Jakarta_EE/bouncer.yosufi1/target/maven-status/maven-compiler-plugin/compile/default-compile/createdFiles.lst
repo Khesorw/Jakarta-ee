@@ -1,0 +1,15 @@
+cst8218\hasib\presentation\ApplicationConfig.class
+cst8218\hasib\business\BouncerGame.class
+cst8218\hasib\entity\Bouncer.class
+cst8218\hasib\util\JsfUtil.class
+cst8218\hasib\presentation\BouncerController$1.class
+cst8218\hasib\business\BouncerFacade.class
+cst8218\hasib\util\PaginationHelper.class
+cst8218\hasib\RestServices\BouncerFacadeREST.class
+cst8218\hasib\presentation\BouncerController.class
+cst8218\hasib\business\JAXRSConfiguration.class
+cst8218\hasib\business\AbstractFacade.class
+cst8218\hasib\presentation\BouncerController$BouncerControllerConverter.class
+cst8218\hasib\RestServices\AbstractFacade.class
+cst8218\hasib\business\BouncerGame$1.class
+cst8218\hasib\resources\JavaEE8Resource.class
